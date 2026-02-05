@@ -41,6 +41,34 @@
         </div>
     </div>
     <div class="col-12 col-md-6 col-xl-3">
+        <div class="stat-card border-warning bg-warning-subtle">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                    <p class="stat-label mb-1">Pending Teacher Approvals</p>
+                    <div class="stat-value"><?= $stats['pending_teacher_approvals'] ?></div>
+                </div>
+                <div class="stat-icon bg-white text-warning">
+                    <i class="bi bi-person-check"></i>
+                </div>
+            </div>
+            <span class="text-muted small">Teacher signups to review</span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="stat-card border-warning bg-warning-subtle">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                    <p class="stat-label mb-1">Pending Student Approvals</p>
+                    <div class="stat-value"><?= $stats['pending_student_approvals'] ?></div>
+                </div>
+                <div class="stat-icon bg-white text-warning">
+                    <i class="bi bi-person-lines-fill"></i>
+                </div>
+            </div>
+            <span class="text-muted small">Student requests awaiting approval</span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
         <div class="stat-card border-info bg-info-subtle">
             <div class="d-flex align-items-center justify-content-between mb-3">
                 <div>

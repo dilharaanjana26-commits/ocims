@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS teachers (
     password VARCHAR(255) NOT NULL,
     subscription_status VARCHAR(20) NOT NULL DEFAULT 'inactive',
     subscription_expiry DATE NULL,
-    mobile VARCHAR(20) NOT NULL
+    mobile VARCHAR(20) NOT NULL,
+    approval_status VARCHAR(20) NOT NULL DEFAULT 'pending'
 );
 
 CREATE TABLE IF NOT EXISTS students (
@@ -23,7 +24,8 @@ CREATE TABLE IF NOT EXISTS students (
     city VARCHAR(100) NOT NULL,
     WhatsApp VARCHAR(20) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    approval_status VARCHAR(20) NOT NULL DEFAULT 'pending'
 );
 
 CREATE TABLE IF NOT EXISTS batches (
