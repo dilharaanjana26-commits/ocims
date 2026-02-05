@@ -24,10 +24,17 @@ class Router
         }
 
         $handler = $this->routes[$method][$route] ?? null;
+        $params = [];
+        if (!$handler) {
+            [$handler, $params] = $this->matchDynamicRoute($method, $route);
+        }
         if (!$handler) {
             http_response_code(404);
             echo '404 Not Found';
             return;
+        }
+        if ($params) {
+            $_GET = array_merge($_GET, $params);
         }
         [$controller, $action] = $handler;
         if (!class_exists($controller)) {
@@ -35,5 +42,31 @@ class Router
         }
         $instance = new $controller();
         $instance->$action();
+    }
+
+    private function matchDynamicRoute($method, $route)
+    {
+        foreach ($this->routes[$method] ?? [] as $path => $handler) {
+            if (strpos($path, '{') === false) {
+                continue;
+            }
+            $paramNames = [];
+            $pattern = preg_replace_callback('/\{([^}]+)\}/', function ($matches) use (&$paramNames) {
+                $paramNames[] = $matches[1];
+                return '([^/]+)';
+            }, $path);
+            $pattern = '#^' . $pattern . '$#';
+            if (!preg_match($pattern, $route, $matches)) {
+                continue;
+            }
+            array_shift($matches);
+            $params = [];
+            foreach ($matches as $index => $value) {
+                $params[$paramNames[$index]] = $value;
+            }
+            return [$handler, $params];
+        }
+
+        return [null, []];
     }
 }
