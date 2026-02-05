@@ -4,17 +4,22 @@ require_once __DIR__ . '/../app/bootstrap.php';
 
 $router = new Router();
 
-$router->get('', ['AuthController', 'login']);
+$router->get('', ['HomeController', 'index']);
 $router->get('login', ['AuthController', 'login']);
 $router->post('login', ['AuthController', 'handleLogin']);
+$router->get('signup', ['AuthController', 'signup']);
+$router->post('signup/teacher', ['AuthController', 'registerTeacher']);
+$router->post('signup/student', ['AuthController', 'registerStudent']);
 $router->get('logout', ['AuthController', 'logout']);
 
 $router->get('admin', ['Admin\\DashboardController', 'index']);
 $router->get('admin/dashboard', ['Admin\\DashboardController', 'index']);
 $router->get('admin/teachers', ['Admin\\TeachersController', 'index']);
 $router->post('admin/teachers/create', ['Admin\\TeachersController', 'store']);
+$router->post('admin/teachers/approve', ['Admin\\TeachersController', 'approve']);
 $router->get('admin/students', ['Admin\\StudentsController', 'index']);
 $router->post('admin/students/create', ['Admin\\StudentsController', 'store']);
+$router->post('admin/students/approve', ['Admin\\StudentsController', 'approve']);
 $router->get('admin/batches', ['Admin\\BatchesController', 'index']);
 $router->post('admin/batches/create', ['Admin\\BatchesController', 'store']);
 $router->get('admin/payments', ['Admin\\PaymentsController', 'index']);

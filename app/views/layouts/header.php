@@ -31,9 +31,12 @@ $isAdminRoute = strpos($route, 'admin') === 0;
             <span class="badge bg-light text-dark ms-2 d-none d-sm-inline">OCIMS</span>
         </a>
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
                 <?php if (Auth::check()): ?>
                     <li class="nav-item"><a class="nav-link" href="/public/index.php?route=logout">Logout</a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="/public/index.php?route=login">Login</a></li>
+                    <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-outline-light nav-cta" href="/public/index.php?route=signup">Sign up</a></li>
                 <?php endif; ?>
             </ul>
         </div>

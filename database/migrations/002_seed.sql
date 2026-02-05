@@ -1,15 +1,15 @@
 INSERT INTO admins (name, email, password) VALUES
 ('Admin User', 'admin@ocims.test', '$2y$12$2FemVxc.3J1nJzu/zFuccut97sgsyxbLBHgrDs7JDbMTnQBoZfFRS');
 
-INSERT INTO teachers (name, email, password, subscription_status, subscription_expiry, mobile) VALUES
-('Teacher One', 'teacher1@ocims.test', '$2y$12$9PySy6WA44V6mn7bd/YY7u8orYcoa.YZBmcqpJ2/gCHsi2zNjNcT.', 'active', DATE_ADD(CURDATE(), INTERVAL 1 MONTH), '0710000001'),
-('Teacher Two', 'teacher2@ocims.test', '$2y$12$9PySy6WA44V6mn7bd/YY7u8orYcoa.YZBmcqpJ2/gCHsi2zNjNcT.', 'inactive', NULL, '0710000002');
+INSERT INTO teachers (name, email, password, subscription_status, subscription_expiry, mobile, approval_status) VALUES
+('Teacher One', 'teacher1@ocims.test', '$2y$12$9PySy6WA44V6mn7bd/YY7u8orYcoa.YZBmcqpJ2/gCHsi2zNjNcT.', 'active', DATE_ADD(CURDATE(), INTERVAL 1 MONTH), '0710000001', 'approved'),
+('Teacher Two', 'teacher2@ocims.test', '$2y$12$9PySy6WA44V6mn7bd/YY7u8orYcoa.YZBmcqpJ2/gCHsi2zNjNcT.', 'inactive', NULL, '0710000002', 'approved');
 
-INSERT INTO students (name, age, NIC, city, WhatsApp, email, password) VALUES
-('Student One', 18, 'NIC001', 'City A', '0711111111', 'student1@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe'),
-('Student Two', 19, 'NIC002', 'City B', '0711111112', 'student2@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe'),
-('Student Three', 20, 'NIC003', 'City C', '0711111113', 'student3@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe'),
-('Student Four', 21, 'NIC004', 'City D', '0711111114', 'student4@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe');
+INSERT INTO students (name, age, NIC, city, WhatsApp, email, password, approval_status) VALUES
+('Student One', 18, 'NIC001', 'City A', '0711111111', 'student1@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe', 'approved'),
+('Student Two', 19, 'NIC002', 'City B', '0711111112', 'student2@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe', 'approved'),
+('Student Three', 20, 'NIC003', 'City C', '0711111113', 'student3@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe', 'approved'),
+('Student Four', 21, 'NIC004', 'City D', '0711111114', 'student4@ocims.test', '$2y$12$t6lvuaJYkRwDjLGt3rIoOOoOcJio5v2qEGjEJIx5qq0QAa6b.mtNe', 'approved');
 
 INSERT INTO batches (name, teacher_id, fee_amount) VALUES
 ('Maths Batch A', 1, 1000.00),
