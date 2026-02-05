@@ -9,6 +9,7 @@ $router->get('login', ['AuthController', 'login']);
 $router->post('login', ['AuthController', 'handleLogin']);
 $router->get('logout', ['AuthController', 'logout']);
 
+$router->get('admin', ['Admin\\DashboardController', 'index']);
 $router->get('admin/dashboard', ['Admin\\DashboardController', 'index']);
 $router->get('admin/teachers', ['Admin\\TeachersController', 'index']);
 $router->post('admin/teachers/create', ['Admin\\TeachersController', 'store']);
@@ -27,6 +28,7 @@ $router->post('admin/reminders/run', ['Admin\\RemindersController', 'runJobs']);
 $router->get('admin/reports', ['Admin\\ReportsController', 'index']);
 $router->get('admin/setup-check', ['Admin\\SetupController', 'index']);
 
+$router->get('teacher', ['Teacher\\DashboardController', 'index']);
 $router->get('teacher/dashboard', ['Teacher\\DashboardController', 'index']);
 $router->get('teacher/payments', ['Teacher\\PaymentsController', 'index']);
 $router->post('teacher/payments/create', ['Teacher\\PaymentsController', 'store']);
@@ -39,6 +41,7 @@ $router->get('teacher/content', ['Teacher\\ContentController', 'index']);
 $router->post('teacher/content/tute', ['Teacher\\ContentController', 'uploadTute']);
 $router->post('teacher/content/live', ['Teacher\\ContentController', 'addLive']);
 
+$router->get('student/{id}', ['Student\\DashboardController', 'index']);
 $router->get('student/dashboard', ['Student\\DashboardController', 'index']);
 $router->get('student/payments', ['Student\\PaymentsController', 'index']);
 $router->post('student/payments/manual', ['Student\\PaymentsController', 'storeManual']);
