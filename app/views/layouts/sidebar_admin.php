@@ -11,10 +11,38 @@ $menuItems = [
     'admin/reports' => ['label' => 'Reports', 'icon' => 'bi-bar-chart'],
     'admin/setup-check' => ['label' => 'Setup Check', 'icon' => 'bi-gear'],
 ];
+
+$renderAdminNav = function (array $items, string $currentRoute): void {
+    foreach ($items as $path => $item) {
+        $active = $currentRoute === $path ? 'active' : '';
+        ?>
+        <a class="nav-link d-flex align-items-center gap-2 <?= $active ?>" href="/public/index.php?route=<?= $path ?>">
+            <i class="bi <?= $item['icon'] ?>"></i>
+            <span><?= $item['label'] ?></span>
+        </a>
+        <?php
+    }
+};
 ?>
 
-<div class="offcanvas-lg offcanvas-start admin-sidebar" tabindex="-1" id="adminSidebar" aria-labelledby="adminSidebarLabel">
-    <div class="offcanvas-header d-lg-none">
+<aside class="admin-sidebar d-none d-lg-flex flex-column">
+    <div class="sidebar-brand px-4 py-4">
+        <span class="text-uppercase text-muted small">Administration</span>
+    </div>
+    <nav class="nav flex-column px-3">
+        <?php $renderAdminNav($menuItems, $route); ?>
+    </nav>
+    <div class="mt-auto px-4 py-4 sidebar-footer">
+        <?php if (Auth::check()): ?>
+            <a class="btn btn-outline-light w-100" href="/public/index.php?route=logout">
+                <i class="bi bi-box-arrow-right me-2"></i>Logout
+            </a>
+        <?php endif; ?>
+    </div>
+</aside>
+
+<div class="offcanvas offcanvas-start d-lg-none admin-sidebar admin-sidebar--offcanvas" tabindex="-1" id="adminSidebar" aria-labelledby="adminSidebarLabel">
+    <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="adminSidebarLabel">Admin Menu</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -23,13 +51,7 @@ $menuItems = [
             <span class="text-uppercase text-muted small">Administration</span>
         </div>
         <nav class="nav flex-column px-3">
-            <?php foreach ($menuItems as $path => $item): ?>
-                <?php $active = $route === $path ? 'active' : ''; ?>
-                <a class="nav-link d-flex align-items-center gap-2 <?= $active ?>" href="/public/index.php?route=<?= $path ?>">
-                    <i class="bi <?= $item['icon'] ?>"></i>
-                    <span><?= $item['label'] ?></span>
-                </a>
-            <?php endforeach; ?>
+            <?php $renderAdminNav($menuItems, $route); ?>
         </nav>
         <div class="mt-auto px-4 py-4 sidebar-footer">
             <?php if (Auth::check()): ?>
