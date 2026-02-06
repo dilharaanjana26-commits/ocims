@@ -520,32 +520,233 @@ body.lms-body {
 }
 
 .hero-section {
-    background: linear-gradient(120deg, rgba(47, 111, 237, 0.12), rgba(25, 135, 84, 0.08));
+    background: linear-gradient(120deg, rgba(79, 70, 229, 0.08), rgba(248, 250, 252, 0));
     border-radius: 24px;
     padding: 2.5rem;
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
 }
 
 .hero-panel {
     background: #ffffff;
     border-radius: 20px;
     padding: 2rem;
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    box-shadow: var(--ocims-card-shadow);
 }
 
 .hero-metric {
     background: #f8fafc;
     border-radius: 16px;
-    padding: 1rem 1.25rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .hero-callout {
     display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.hero-callout i {
+    font-size: 1.4rem;
+}
+
+.hero-highlights {
+    display: grid;
     gap: 1rem;
+}
+
+.hero-highlight {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.hero-highlight i {
+    font-size: 1.2rem;
+    color: var(--ocims-primary);
+}
+
+.section-heading {
+    display: flex;
     align-items: center;
-    background: #f1f5ff;
-    border-radius: 16px;
-    padding: 1rem 1.25rem;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.feature-tile {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+}
+
+.feature-tile__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(79, 70, 229, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.learning-paths {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.path-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.path-card__header {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.path-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.path-list li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: #475569;
+}
+
+.path-list li::before {
+    content: "•";
+    color: var(--ocims-primary);
+    font-weight: 700;
+}
+
+.workflow-card,
+.insight-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.workflow-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.workflow-step:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.workflow-step__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(79, 70, 229, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--ocims-primary);
+}
+
+.insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.insight-item {
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: left;
+}
+
+.insight-item h4 {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.insight-footer {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cta-section {
+    margin-top: 4rem;
+}
+
+.cta-card {
+    background: linear-gradient(120deg, rgba(79, 70, 229, 0.12), rgba(14, 165, 233, 0.12));
+    border-radius: 24px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+@media (max-width: 992px) {
+    .hero-section {
+        padding: 2rem;
+    }
+
+    .lms-main {
+        margin-left: 0;
+        padding: 2rem 1.5rem;
+    }
+
+    .lms-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 1.5rem;
+    }
+
+    .hero-panel {
+        padding: 1.5rem;
+    }
+
+    .cta-card {
+        padding: 2rem 1.5rem;
+    }
 }
 
 .post-card {
