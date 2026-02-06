@@ -35,6 +35,28 @@
                     <input class="form-control" type="file" name="proof" required>
                 </div>
                 <div class="col-12"><button class="btn btn-primary w-100">Submit manual payment</button></div>
+                <div class="col-12">
+                    <div class="manual-payment-details">
+                        <p class="text-uppercase text-muted small mb-2">Manual payment methods</p>
+                        <div class="manual-payment-method">
+                            <h6 class="mb-1">Pay On Bank ✅</h6>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>Account Name : Didula Rashmika</li>
+                                <li>Account Number : 1168 5518 5748</li>
+                                <li>Bank Name : SAMPATH BANK PLC</li>
+                                <li>Branch Name : ANURADHAPURA NEW TOWN BRANCH</li>
+                            </ul>
+                        </div>
+                        <div class="manual-payment-method">
+                            <h6 class="mb-1">Pay On Ez Cash ✅</h6>
+                            <p class="small text-muted mb-3">Number - 0771820962</p>
+                        </div>
+                        <div class="manual-payment-method">
+                            <h6 class="mb-1">Pay On PayPal ✅</h6>
+                            <p class="small text-muted mb-0">bandaraakarsha99@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
