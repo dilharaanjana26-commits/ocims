@@ -23,6 +23,7 @@ $isLmsRoute = $isStudentRoute || $isTeacherRoute;
     <link href="/public/assets/css/theme.css" rel="stylesheet">
 </head>
 <body class="app-body<?= $isLmsRoute ? ' lms-body' : '' ?>">
+<body class="app-body<?= $isStudentRoute ? ' lms-body' : '' ?>">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ocims-navbar">
     <div class="container-fluid">
         <?php if ($isAdminRoute): ?>
@@ -54,6 +55,9 @@ $isLmsRoute = $isStudentRoute || $isTeacherRoute;
 <?php elseif ($isLmsRoute): ?>
     <div class="lms-shell">
         <?php require __DIR__ . ($isTeacherRoute ? '/sidebar_teacher.php' : '/sidebar_student.php'); ?>
+<?php elseif ($isStudentRoute): ?>
+    <div class="lms-shell">
+        <?php require __DIR__ . '/sidebar_student.php'; ?>
         <main class="lms-main">
             <div class="lms-content">
 <?php else: ?>
