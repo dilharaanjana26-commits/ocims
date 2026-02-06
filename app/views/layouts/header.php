@@ -4,6 +4,9 @@ use Flash;
 
 $route = $_GET['route'] ?? '';
 $isAdminRoute = strpos($route, 'admin') === 0;
+$isStudentRoute = strpos($route, 'student') === 0;
+$isTeacherRoute = strpos($route, 'teacher') === 0;
+$isLmsRoute = $isStudentRoute || $isTeacherRoute;
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,12 +16,13 @@ $isAdminRoute = strpos($route, 'admin') === 0;
     <title>Online Class Institute Management System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="/public/assets/css/theme.css" rel="stylesheet">
 </head>
-<body class="app-body">
+<body class="app-body<?= $isLmsRoute ? ' lms-body' : '' ?>">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ocims-navbar">
     <div class="container-fluid">
         <?php if ($isAdminRoute): ?>
@@ -47,6 +51,11 @@ $isAdminRoute = strpos($route, 'admin') === 0;
         <?php require __DIR__ . '/sidebar_admin.php'; ?>
         <main class="admin-content">
             <div class="container-fluid py-4">
+<?php elseif ($isLmsRoute): ?>
+    <div class="lms-shell">
+        <?php require __DIR__ . ($isTeacherRoute ? '/sidebar_teacher.php' : '/sidebar_student.php'); ?>
+        <main class="lms-main">
+            <div class="lms-content">
 <?php else: ?>
     <div class="container my-4">
 <?php endif; ?>

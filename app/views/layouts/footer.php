@@ -2,6 +2,10 @@
             </div>
         </main>
     </div>
+<?php elseif ((isset($isStudentRoute) && $isStudentRoute) || (isset($isTeacherRoute) && $isTeacherRoute)): ?>
+            </div>
+        </main>
+    </div>
 <?php else: ?>
     </div>
 <?php endif; ?>
