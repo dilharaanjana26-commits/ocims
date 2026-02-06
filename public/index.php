@@ -23,6 +23,7 @@ $router->post('admin/students/approve', ['Admin\\StudentsController', 'approve']
 $router->get('admin/batches', ['Admin\\BatchesController', 'index']);
 $router->post('admin/batches/create', ['Admin\\BatchesController', 'store']);
 $router->get('admin/payments', ['Admin\\PaymentsController', 'index']);
+$router->get('admin/payments/proof', ['Admin\\PaymentsController', 'proof']);
 $router->post('admin/payments/teacher/approve', ['Admin\\PaymentsController', 'approveTeacher']);
 $router->post('admin/payments/student/approve', ['Admin\\PaymentsController', 'approveStudent']);
 $router->get('admin/posts', ['Admin\\PostsController', 'index']);

@@ -30,7 +30,10 @@ class PaymentsController extends Controller
             $this->redirect('/public/index.php?route=student/payments');
         }
         try {
-            $proof = Helpers::uploadFile($_FILES['proof'], __DIR__ . '/../../../public/assets/uploads/payment_proofs', ['jpg', 'jpeg', 'png', 'pdf']);
+            $publicRoot = realpath(__DIR__ . '/../../../public');
+            $uploadDir = $publicRoot . '/uploads/payment_proofs';
+            $proof = Helpers::uploadFile($_FILES['proof'], $uploadDir, ['jpg', 'jpeg', 'png', 'pdf']);
+            $relativeProof = ltrim(str_replace($publicRoot, '', $proof), '/\\');
             $amount = (float) ($_POST['amount'] ?? 0);
             $stmt = Database::get()->prepare('INSERT INTO student_payments (student_id, batch_id, amount, convenience_fee, total_amount, payment_type, proof, status, paid_on) VALUES (:student_id, :batch_id, :amount, :convenience_fee, :total_amount, :payment_type, :proof, :status, :paid_on)');
             $stmt->execute([
@@ -40,7 +43,7 @@ class PaymentsController extends Controller
                 'convenience_fee' => 0,
                 'total_amount' => $amount,
                 'payment_type' => 'manual',
-                'proof' => str_replace(__DIR__ . '/../../../public', '', $proof),
+                'proof' => $relativeProof,
                 'status' => 'pending',
                 'paid_on' => date('Y-m-d'),
             ]);

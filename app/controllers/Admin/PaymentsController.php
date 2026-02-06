@@ -6,6 +6,7 @@ use Database;
 use Flash;
 use Csrf;
 use Env;
+use Auth;
 
 class PaymentsController extends Controller
 {
@@ -52,5 +53,71 @@ class PaymentsController extends Controller
         $db->prepare("UPDATE student_payments SET status = 'approved' WHERE id = :id")->execute(['id' => $paymentId]);
         Flash::success('Student payment approved.');
         $this->redirect('/public/index.php?route=admin/payments');
+    }
+
+    public function proof()
+    {
+        if (!Auth::check() || Auth::role() !== 'admin') {
+            $this->renderNotFound();
+        }
+
+        $paymentId = (int) ($_GET['id'] ?? 0);
+        if ($paymentId <= 0) {
+            $this->renderNotFound();
+        }
+
+        $db = Database::get();
+        $payment = $db->prepare('SELECT proof FROM student_payments WHERE id = :id');
+        $payment->execute(['id' => $paymentId]);
+        $paymentData = $payment->fetch();
+
+        if (!$paymentData) {
+            $payment = $db->prepare('SELECT proof FROM teacher_payments WHERE id = :id');
+            $payment->execute(['id' => $paymentId]);
+            $paymentData = $payment->fetch();
+        }
+
+        $proofPath = $paymentData['proof'] ?? '';
+        if ($proofPath === '') {
+            $this->renderNotFound();
+        }
+
+        $publicRoot = realpath(__DIR__ . '/../../../public');
+        $baseDir = $publicRoot ? realpath($publicRoot . '/uploads/payment_proofs') : false;
+        if (!$publicRoot || !$baseDir) {
+            $this->renderNotFound();
+        }
+
+        $relativeProof = ltrim($proofPath, '/\\');
+        $fullPath = realpath($publicRoot . '/' . $relativeProof);
+        if (!$fullPath || strpos($fullPath, $baseDir) !== 0 || !is_file($fullPath)) {
+            $this->renderNotFound();
+        }
+
+        $extension = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'pdf' => 'application/pdf',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+        ];
+
+        if (!isset($mimeTypes[$extension])) {
+            $this->renderNotFound();
+        }
+
+        header('Content-Type: ' . $mimeTypes[$extension]);
+        header('Content-Length: ' . filesize($fullPath));
+        header('Content-Disposition: inline; filename="' . basename($fullPath) . '"');
+        readfile($fullPath);
+        exit;
+    }
+
+    private function renderNotFound()
+    {
+        header('HTTP/1.1 404 Not Found');
+        echo '404 Not Found';
+        exit;
     }
 }

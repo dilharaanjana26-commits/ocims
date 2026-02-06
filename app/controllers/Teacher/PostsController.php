@@ -75,14 +75,17 @@ class PostsController extends Controller
             $this->redirect('/public/index.php?route=teacher/posts');
         }
         try {
-            $proof = Helpers::uploadFile($_FILES['proof'], __DIR__ . '/../../../public/assets/uploads/payment_proofs', ['jpg', 'jpeg', 'png', 'pdf']);
+            $publicRoot = realpath(__DIR__ . '/../../../public');
+            $uploadDir = $publicRoot . '/uploads/payment_proofs';
+            $proof = Helpers::uploadFile($_FILES['proof'], $uploadDir, ['jpg', 'jpeg', 'png', 'pdf']);
+            $relativeProof = ltrim(str_replace($publicRoot, '', $proof), '/\\');
             Database::get()->prepare('INSERT INTO post_payments (post_id, teacher_id, amount, payment_type, proof, status, created_at) VALUES (:post_id, :teacher_id, :amount, :payment_type, :proof, :status, NOW())')
                 ->execute([
                     'post_id' => (int) ($_POST['post_id'] ?? 0),
                     'teacher_id' => $_SESSION['user']['id'],
                     'amount' => (float) ($_POST['amount'] ?? 0),
                     'payment_type' => 'manual',
-                    'proof' => str_replace(__DIR__ . '/../../../public', '', $proof),
+                    'proof' => $relativeProof,
                     'status' => 'pending',
                 ]);
             Flash::success('Feature request submitted for approval.');
