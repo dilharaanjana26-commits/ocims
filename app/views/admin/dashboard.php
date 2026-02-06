@@ -1,9 +1,11 @@
 <?php require __DIR__ . '/../layouts/header.php'; ?>
 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-3">
     <div>
-        <h2 class="mb-1">Admin Dashboard</h2>
+        <p class="text-uppercase lms-eyebrow">Admin</p>
+        <h2 class="lms-heading mb-1">Admin Dashboard</h2>
         <p class="text-muted mb-0">Welcome back! Here is a quick snapshot of institute activity today.</p>
     </div>
+    <span class="badge badge-category badge-category--indigo">Overview</span>
 </div>
 
 <div class="quick-overview mb-4">

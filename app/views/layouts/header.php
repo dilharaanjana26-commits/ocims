@@ -5,6 +5,8 @@ use Flash;
 $route = $_GET['route'] ?? '';
 $isAdminRoute = strpos($route, 'admin') === 0;
 $isStudentRoute = strpos($route, 'student') === 0;
+$isTeacherRoute = strpos($route, 'teacher') === 0;
+$isLmsRoute = $isStudentRoute || $isTeacherRoute;
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,6 +22,7 @@ $isStudentRoute = strpos($route, 'student') === 0;
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="/public/assets/css/theme.css" rel="stylesheet">
 </head>
+<body class="app-body<?= $isLmsRoute ? ' lms-body' : '' ?>">
 <body class="app-body<?= $isStudentRoute ? ' lms-body' : '' ?>">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ocims-navbar">
     <div class="container-fluid">
@@ -49,6 +52,9 @@ $isStudentRoute = strpos($route, 'student') === 0;
         <?php require __DIR__ . '/sidebar_admin.php'; ?>
         <main class="admin-content">
             <div class="container-fluid py-4">
+<?php elseif ($isLmsRoute): ?>
+    <div class="lms-shell">
+        <?php require __DIR__ . ($isTeacherRoute ? '/sidebar_teacher.php' : '/sidebar_student.php'); ?>
 <?php elseif ($isStudentRoute): ?>
     <div class="lms-shell">
         <?php require __DIR__ . '/sidebar_student.php'; ?>
