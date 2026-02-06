@@ -3,7 +3,6 @@
         </main>
     </div>
 <?php elseif ((isset($isStudentRoute) && $isStudentRoute) || (isset($isTeacherRoute) && $isTeacherRoute)): ?>
-<?php elseif (isset($isStudentRoute) && $isStudentRoute): ?>
             </div>
         </main>
     </div>
